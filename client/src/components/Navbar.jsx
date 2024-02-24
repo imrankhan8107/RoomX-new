@@ -10,13 +10,13 @@ function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navigate = useNavigate(); // Access the history object for navigation
-  const location = useLocation();
+  // const location = useLocation();
 
   useEffect(() => {
     if (authtoken) {
       setIsLoggedin(true);
     }
-  }, []);
+  }, [authtoken]);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -24,8 +24,8 @@ function Navbar() {
 
   const Logout = () => {
     localStorage.clear();
-    window.location.reload();
     setIsLoggedin(false);
+    window.location.reload();
     setIsMobileMenuOpen(false);
   };
 

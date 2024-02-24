@@ -38,6 +38,7 @@ const BookingForm = ({ selectedRoom }) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          authtoken: `${authtoken}`,
         },
         body: JSON.stringify(bookingData),
       });

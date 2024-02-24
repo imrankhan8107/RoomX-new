@@ -55,7 +55,7 @@ function Login() {
           localStorage.setItem('authtoken', authtoken);
           localStorage.setItem('toastMessage', toastMessage);
           // login();
-          window.location.href = '/room';
+          window.location.href = '/provider';
         }
         if (data.userType === "admin") {
           const authtoken = data.authtoken;

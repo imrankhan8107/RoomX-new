@@ -1,14 +1,21 @@
-const express = require('express');
+const express = require("express");
 
 const router = express.Router();
 
 const {
-    getAllRooms, createBooking, getUserData
-}=require('../controllers/roomController.js')
+  getAllRooms,
+  createBooking,
+  getUserData,
+  getAllProviders,
+  getRoomsByProviderId,
+} = require("../controllers/roomController.js");
 
+router.get("/getallrooms", getAllRooms);
 
-router.get('/getallrooms',getAllRooms)
-router.post('/booking',createBooking)
+router.get("/getAllProviders", getAllProviders);
 
+router.get("/provider/:provider_id", getRoomsByProviderId);
+
+router.post("/booking", createBooking);
 
 module.exports = router;

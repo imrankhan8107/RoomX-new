@@ -81,6 +81,7 @@ function RoomList() {
               <td className="border px-4 py-2">{room.capacity}</td>
               <td className="border px-4 py-2">{room.location}</td>
               <td className="border px-4 py-2">{room.price}</td>
+              <td className="border px-4 py-2">{room.provider_id}</td>
               <td className="border px-4 py-2">
                 <button
                   onClick={() => handleDeleteRoom(room._id)}

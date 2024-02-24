@@ -196,6 +196,11 @@ function AdminPanel() {
               Provider Section
             </button>
           </Link>
+          <Link to="/admin/viewbooking">
+            <button className="bg-blue-500 text-white py-2 px-4 rounded ml-20">
+              View Booking
+            </button>
+          </Link>
         </div>
         <button
           onClick={Logout}

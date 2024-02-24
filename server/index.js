@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/auth", authRoute);
-app.use("/api/admin", verifyAdmin, adminRoute);
+app.use("/api/admin", adminRoute);
 app.use("/api/room", userRoute);
 // app.use("/api/user", verifyUser, userRoute);
 

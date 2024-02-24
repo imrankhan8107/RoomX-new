@@ -1,6 +1,7 @@
 const RoomModel = require("../models/room");
 
 const BookingModel = require("../models/booking");
+const ProviderModel = require("../models/providers");
 
 async function createBooking(req, res) {
   try {
@@ -26,11 +27,32 @@ async function createBooking(req, res) {
 
     await newBooking.save();
 
-    // await RoomModel.findByIdAndUpdate(room, { available: false });
+    await RoomModel.findByIdAndUpdate(roomId, { available: false });
 
     res.status(201).json({ success: true, booking: newBooking });
   } catch (error) {
     console.error(error);
+    res.status(500).json({ success: false, error: "Internal server error" });
+  }
+}
+
+async function getAllProviders(req, res) {
+  try {
+    const providers = await ProviderModel.find();
+    res.status(200).json({ success: true, providers });
+  } catch (error) {
+    console.error("Error getting all providers:", error);
+    res.status(500).json({ success: false, error: "Internal server error" });
+  }
+}
+
+async function getRoomsByProviderId(req, res) {
+  try {
+    const { provider_id } = req.params;
+    const rooms = await RoomModel.find({ provider_id });
+    res.status(200).json({ success: true, rooms });
+  } catch (error) {
+    console.error("Error getting rooms by provider id:", error);
     res.status(500).json({ success: false, error: "Internal server error" });
   }
 }
@@ -49,4 +71,6 @@ async function getAllRooms(req, res) {
 module.exports = {
   getAllRooms,
   createBooking,
+  getAllProviders,
+  getRoomsByProviderId,
 };

@@ -14,10 +14,14 @@ const { v4: uuidv4 } = require("uuid");
 async function sendEmail(to, subject, text, attachments) {
   // Create a transporter
   const transporter = nodemailer.createTransport({
-    service: "Gmail",
+    service: "gmail",
     auth: {
+      type: "OAuth2",
       user: process.env.ADMIN_GMAIL,
       pass: process.env.ADMIN_GMAIL_PASSWORD,
+      clientId: process.env.OAUTH_CLIENTID,
+      clientSecret: process.env.OAUTH_CLIENT_SECRET,
+      refreshToken: process.env.OAUTH_REFRESH_TOKEN,
     },
   });
 
@@ -103,12 +107,7 @@ exports.createUser = async (req, res) => {
 
       const subject = "Welcome to the Room Booking System";
       const text = `Dear ${userCreated.username},\n\nWe're happy to welcome you on board as a registered member of our Meeting Room Booking System`;
-      const attachments = [
-        {
-          filename: "Psychometric Test Instructions.pdf",
-          path: `src/tp/Psychometric Test Instructions.pdf`,
-        },
-      ];
+      const attachments = [];
 
       sendEmail(userCreated.email, subject, text, attachments);
     }

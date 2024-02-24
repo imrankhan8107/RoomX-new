@@ -15,16 +15,18 @@ async function sendEmail(to, subject, text, attachments) {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      // user: process.env.ADMIN_GMAIL,
-      // pass: process.env.ADMIN_GMAIL_PASSWORD,
-      user: "imrankhan24068@gmail.com",
-      pass: "ImranPathan8",
+      type: "OAuth2",
+      user: process.env.ADMIN_GMAIL,
+      pass: process.env.ADMIN_GMAIL_PASSWORD,
+      clientId: process.env.OAUTH_CLIENTID,
+      clientSecret: process.env.OAUTH_CLIENT_SECRET,
+      refreshToken: process.env.OAUTH_REFRESH_TOKEN,
     },
   });
-
+  // console.log(to, subject, text, attachments);
   // Define email data
   const mailOptions = {
-    from: process.env.ADMIN_GMAIL,
+    from: "imran.pathan.8202@gmail.com",
     to: to,
     subject: subject || "Default Subject",
     text: text || "Default Email Text",
@@ -35,7 +37,7 @@ async function sendEmail(to, subject, text, attachments) {
   try {
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
-        console.log(error);
+        console.log("Error is:" + error);
       } else {
         console.log("Email sent: " + info.response);
       }
@@ -250,7 +252,7 @@ async function sendCodetoEmail(req, res) {
 
     const email = org.org_email;
     const subject = "Roomx Organizational Code";
-    const text = `Dear Sir/Ma’am from ${org.org_name},\n\nWe are delighted to announce that we are fully prepared to commence the implementation of the RoomX system at your prestigious institution.\n\nAs part of this process, we are sharing with you a unique organizational code: ${disCode}.\nThe candidates must input this code in order to gain access to System.\n\nPlease note that this code is strictly meant for those who have successfully completed their registration. It is of utmost importance that this code remains confidential and not to be shared with anyone else.\n\nIf you have any queries, please feel free to reach out to us.\n\nWarm regards,\n\nDr. Antony Augusthy`;
+    const text = `Dear Sir/Ma’am from ${org.org_name},\n\nWe are delighted to announce that we are fully prepared to commence the implementation of the RoomX system at your prestigious institution.\n\nAs part of this process, we are sharing with you a unique organizational code: ${disCode}.\nThe candidates must input this code in order to gain access to System.\n\nPlease note that this code is strictly meant for those who have successfully completed their registration. It is of utmost importance that this code remains confidential and not to be shared with anyone else.\n\nIf you have any queries, please feel free to reach out to us.\n\nWarm regards,\n\nMr. Imran Khan `;
 
     await sendEmail(email, subject, text);
 
@@ -315,6 +317,36 @@ async function getAllProviders(req, res) {
     res.status(200).json({ success: true, providers });
   } catch (error) {
     console.error("Error getting all providers:", error);
+    res.status(500).json({ success: false, error: "Internal server error" });
+  }
+}
+
+async function getProviderBookings(req, res) {
+  try {
+    const bookings = await BookingModel.find();
+    // console.log(bookings);
+    let result = [];
+    bookings.map(async (booking) => {
+      // const room = await RoomModel.find({
+      //   _id: booking.roomId,
+      // });
+      // console.log("room", room);
+      // const provider = await ProviderModel.find({
+      //   _id: booking.provider_id,
+      // });
+      // console.log("provider", provider);
+      result.push({
+        // provider_name: provider.provider_name,
+        // room_name: room.room_name,
+        provider_id: booking.provider_id,
+        roomId: booking.roomId,
+        start_date: booking.startDate,
+        end_date: booking.endDate,
+      });
+    });
+    res.status(201).json(result);
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ success: false, error: "Internal server error" });
   }
 }
@@ -393,4 +425,5 @@ module.exports = {
   getAllProviders,
   addProvider,
   getProviderList,
+  getProviderBookings,
 };

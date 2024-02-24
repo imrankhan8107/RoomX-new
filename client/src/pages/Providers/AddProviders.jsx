@@ -207,7 +207,7 @@ function AddProviders() {
           type="submit"
           className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 mr-10"
         >
-          Add Room
+          Add Provider
         </button>
 
         <Link to="/admin/getproviders">

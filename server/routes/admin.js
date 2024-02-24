@@ -17,6 +17,7 @@ const {
   getAllProviders,
   addProvider,
   getProviderList,
+  getProviderBookings,
 } = require("../controllers/adminController.js");
 // const fetchUser = require('../middlewares/fetchUser');
 
@@ -41,6 +42,8 @@ router.get("/dashboard", adminDashboard);
 router.post("/sendcodetoemail", sendCodetoEmail);
 
 router.get("/getAllProviders", getAllProviders);
+
+router.get("/getBookings", getProviderBookings);
 
 router.get("/getProviderList", getProviderList);
 
