@@ -313,8 +313,19 @@ async function getProviderList(req, res) {
 
 async function getAllProviders(req, res) {
   try {
-    const providers = await ProviderModel.find();
-    res.status(200).json({ success: true, providers });
+    const location = req.query.location;
+    if (location) {
+      const providers = await ProviderModel.find({
+        provider_address: {
+          $regex: new RegExp(location, "i"),
+        },
+      });
+      console.log(providers);
+      return res.status(200).json({ success: true, providers });
+    } else {
+      const providers = await ProviderModel.find();
+      return res.status(200).json({ success: true, providers });
+    }
   } catch (error) {
     console.error("Error getting all providers:", error);
     res.status(500).json({ success: false, error: "Internal server error" });
