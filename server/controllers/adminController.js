@@ -337,24 +337,31 @@ async function getProviderBookings(req, res) {
     const bookings = await BookingModel.find();
     // console.log(bookings);
     let result = [];
-    bookings.map(async (booking) => {
-      // const room = await RoomModel.find({
-      //   _id: booking.roomId,
-      // });
-      // console.log("room", room);
-      // const provider = await ProviderModel.find({
-      //   _id: booking.provider_id,
-      // });
-      // console.log("provider", provider);
+    const rooms = await RoomModel.find();
+    const providers = await ProviderModel.find();
+    bookings.forEach((booking) => {
+      const filteredProvider = providers.filter((provider) => {
+        return provider._id.toString() === booking.provider_id.toString();
+      });
+      const filteredRoom = rooms.filter((room) => {
+        return room._id.toString() === booking.roomId.toString();
+      });
       result.push({
-        // provider_name: provider.provider_name,
-        // room_name: room.room_name,
         provider_id: booking.provider_id,
         roomId: booking.roomId,
+        provider_name:
+          filteredProvider.length === 0
+            ? booking.provider_id
+            : filteredProvider[0].provider_name,
+        room_name:
+          filteredRoom.length === 0
+            ? booking.roomId
+            : filteredRoom[0].room_name,
         start_date: booking.startDate,
         end_date: booking.endDate,
       });
     });
+    // console.log(result);
     res.status(201).json(result);
   } catch (error) {
     console.error(error);

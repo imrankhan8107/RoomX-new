@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 function ProviderList() {
   const [providers, setproviders] = useState([]);
   const authtoken = localStorage.getItem("authtoken");
+  
 
   useEffect(() => {
     // Fetch rooms from the backend
@@ -62,8 +63,8 @@ function ProviderList() {
   };
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold mb-4 text-gray-700">Room List</h2>
+    <div className="mx-16">
+      <h2 className="text-2xl font-bold mb-4 text-gray-700">Provider List</h2>
       <table className="table-auto">
         <thead>
           <tr>
@@ -72,6 +73,7 @@ function ProviderList() {
             <th className="px-4 py-2">Location</th>
             <th className="px-4 py-2">Rating</th>
             <th className="px-4 py-2">code</th>
+            {/* <th className="px-4 py-2">Analytics</th> */}
           </tr>
         </thead>
         <tbody>
@@ -82,6 +84,9 @@ function ProviderList() {
               <td className="border px-4 py-2">{provider.provider_address}</td>
               <td className="border px-4 py-2">{provider.provider_rating}</td>
               <td className="border px-4 py-2">{provider.provider_code}</td>
+              {/* <Link to> */}
+
+              {/* </Link> */}
               <td className="border px-4 py-2">
                 <button
                   onClick={() => handleDeleteRoom(provider._id)}
