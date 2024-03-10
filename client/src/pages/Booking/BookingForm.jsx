@@ -30,9 +30,11 @@ const BookingForm = ({ selectedRoom }) => {
         provider_id: selectedRoom.provider_id,
         startDate: `${selectedStartDate} ${selectedStartTime}`,
         endDate: `${selectedEndDate} ${selectedEndTime}`,
-        startTime: selectedStartTime,
-        endTime: selectedEndTime,
+        startTime: `${selectedStartDate} ${selectedStartTime}`,
+        endTime: `${selectedEndDate} ${selectedEndTime}`,
       };
+
+      // console.log(bookingData);
 
       const response = await fetch("http://localhost:8001/api/room/booking", {
         method: "POST",
