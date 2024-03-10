@@ -75,18 +75,6 @@ const GetInTouch = () => {
   return (
     <div id="getintouch" className="bg-gradient-to-r from-blue-100 via-blue-200 to-blue-100 w-full py-12">
       <div className="max-w-screen-lg mx-auto flex flex-col md:flex-row items-center justify-center px-4">
-        <div className="md:w-1/2 md:pr-8 mb-8">
-          <div className="bg-white p-4 rounded-lg shadow-md hover:bg-blue-50 transition duration-300">
-            <h4 className="text-2xl font-semibold mb-2 text-gray-700">
-            <FaClock className="inline-block ml-2 mr-2" /> Work Time
-            </h4>
-            <p className="text-lg text-gray-600">Mon-Fri: 9:00 AM - 6:00 PM</p>
-            <p className="mt-2 text-gray-500">
-              Connect with us and expect immediate personalized responses during our work hours.
-            </p>
-          </div>
-        </div>
-
         <div className="md:w-1/2">
           <div className="text-center">
             <h3 className="text-gray-700 text-4xl font-semibold font-inter leading-10 mb-4">

@@ -14,6 +14,7 @@ import DisplayProviders from "./pages/Providers/DisplayProviders";
 import DisplayRooms from "./pages/Room/DisplayRooms";
 import ViewBooking from "./pages/Booking/ViewBooking";
 import PowerBIEmbed from "./pages/Providers/Analytics";
+import Bookings from "./pages/Booking/Bookings";
 
 function AllRoutes() {
   const authtoken = localStorage.getItem("authtoken");
@@ -22,6 +23,7 @@ function AllRoutes() {
       <Route path="/" element={<Home />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/bookings" element={<Bookings />} />
       <Route
         path="/admin"
         element={authtoken ? <AdminPanel /> : <Navigate to="/login" />}

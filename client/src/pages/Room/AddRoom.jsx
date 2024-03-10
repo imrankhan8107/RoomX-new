@@ -40,13 +40,16 @@ function AddRoom() {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     console.log(name, value, typeof value);
+    
+    // If the field is capacity or price, parse the value to integer, otherwise keep it as is
+    const updatedValue = name === "capacity" || name === "price" ? parseInt(value, 10) : value;
+  
     setRoomData((prevData) => ({
       ...prevData,
-      [name]:
-        name === "capacity" || name === "price" ? parseInt(value, 10) : value,
+      [name]: updatedValue,
     }));
   };
-
+  
   // TODO: localhost:8001/api/admin/getProviderList  =?get the providers List
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -151,6 +154,24 @@ function AddRoom() {
             onChange={handleInputChange}
             className="w-full p-2 border rounded"
             min={0}
+          />
+        </div>
+
+        <div className="mb-4">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="accessories"
+          >
+            Accessories:
+          </label>
+          <input
+            type="text"
+            id="accessories"
+            name="accessories"
+            value={roomData.accessories}
+            onChange={handleInputChange}
+            className="w-full p-2 border rounded"
+            placeholder="Enter accessories separated by commas"
           />
         </div>
 

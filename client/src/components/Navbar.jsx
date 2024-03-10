@@ -76,6 +76,12 @@ function Navbar() {
           >
             Contact Us
           </a>
+          <a
+            href="/bookings"
+            className="nav-link block px-2 hover:bg-gradient-to-r from-orange-500 to-yellow-500 hover:text-white transition duration-300 py-1"
+          >
+            My Bookings
+          </a>
 
           <Link to={isLoggedin ? "/" : "/login"}>
             <button
@@ -135,6 +141,12 @@ function Navbar() {
               className="nav-link block px-2 hover:text-black hover:bg-gray-300 transition duration-300 py-1 mb-2 text-white"
             >
               Contact Us
+            </a>
+            <a
+              href="/ContactUs"
+              className="nav-link block px-2 hover:text-black hover:bg-gray-300 transition duration-300 py-1 mb-2 text-white"
+            >
+              My Bookings
             </a>
 
             {!isLoggedin && (

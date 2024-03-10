@@ -8,6 +8,7 @@ const {
   createUser,
   forgotPassword,
   resetPassword,
+  getUserBookings,
 } = require("../controllers/authController");
 
 const router = express.Router();
@@ -71,5 +72,8 @@ router.post(
   validate,
   resetPassword
 );
+
+router.get("/bookings",validate, getUserBookings)
+
 
 module.exports = router;

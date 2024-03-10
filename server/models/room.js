@@ -31,6 +31,10 @@ const RoomSchema = new Schema({
     ref: "Provider",
     required: true,
   },
+  accessories: [{
+    type: String,
+    required: true
+  }]
 });
 
 const RoomModel = mongoose.model("Room", RoomSchema);

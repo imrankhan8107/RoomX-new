@@ -371,7 +371,7 @@ async function getProviderBookings(req, res) {
 
 async function addRoom(req, res) {
   try {
-    const { room_name, capacity, price, provider_id } = req.body;
+    const { room_name, capacity, price, provider_id, accessories } = req.body;
 
     const roomId = uuidv4();
 
@@ -383,6 +383,7 @@ async function addRoom(req, res) {
       available: true,
       price,
       provider_id,
+      accessories 
     });
 
     // Save the room to the database

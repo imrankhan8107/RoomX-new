@@ -9,6 +9,7 @@ const { validationResult } = require("express-validator");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 const { v4: uuidv4 } = require("uuid");
+const BookingModel = require("../models/booking");
 // const { errorLogger, appLogger } = require('../logger');
 
 async function sendEmail(to, subject, text, attachments) {
@@ -249,3 +250,44 @@ exports.resetPassword = async (req, res) => {
     res.status(500).json({ success: false, error: error });
   }
 };
+
+
+exports.getUserBookings = async (req,res) => {
+  try {
+    const userEmail = req.body.email; // Assuming email is passed in the request body
+    const user = await UserModel.findOne({ email: userEmail });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+
+    // Fetch bookings for the given user
+    const bookings = await BookingModel.find({ users: user._id });
+
+    let result = [];
+    const rooms = await RoomModel.find();
+    const providers = await ProviderModel.find();
+
+    for (const booking of bookings) {
+      const filteredProvider = providers.find(provider => provider._id.toString() === booking.provider_id.toString());
+      const filteredRoom = rooms.find(room => room._id.toString() === booking.roomId.toString());
+
+      result.push({
+        provider_id: booking.provider_id,
+        roomId: booking.roomId,
+        provider_name: filteredProvider ? filteredProvider.provider_name : booking.provider_id,
+        room_name: filteredRoom ? filteredRoom.room_name : booking.roomId,
+        start_date: booking.startDate,
+        end_date: booking.endDate,
+      });
+    }
+
+    res.status(200).json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, error: "Internal server error" });
+  }
+}
+
+
+
