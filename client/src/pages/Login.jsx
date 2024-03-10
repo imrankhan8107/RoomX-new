@@ -127,7 +127,7 @@ function Login() {
             <div className="text-center">
               <button
                 type="submit"
-                className="w-full p-3 rounded-md bg-gradient-to-r from-orange-500 to-yellow-500 text-white hover:from-yellow-600 hover:to-orange-600 focus:outline-none transition duration-300"
+                className="w-full p-3 rounded-md bg-gradient-to-r from-cyan-500 to-blue-500 text-white focus:outline-none transition duration-300"
               >
                 Log In
               </button>

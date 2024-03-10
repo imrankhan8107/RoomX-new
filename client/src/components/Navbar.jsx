@@ -64,12 +64,12 @@ function Navbar() {
           >
             Home
           </Link>
-          <Link
+          {/* <Link
             to="/about"
             className="nav-link px-2 hover:bg-gradient-to-r from-orange-500 to-yellow-500 hover:text-white transition duration-300 py-1"
           >
             About Us
-          </Link>
+          </Link> */}
           <a
             href="/ContactUs"
             className="nav-link block px-2 hover:bg-gradient-to-r from-orange-500 to-yellow-500 hover:text-white transition duration-300 py-1"
@@ -129,13 +129,13 @@ function Navbar() {
             >
               Home
             </Link>
-            <Link
+            {/* <Link
               to="/about"
               onClick={scrollToTop}
               className="nav-link block py-2 hover:text-black hover:bg-gray-300 mb-2 text-white"
             >
               About Us
-            </Link>
+            </Link> */}
             <a
               href="/ContactUs"
               className="nav-link block px-2 hover:text-black hover:bg-gray-300 transition duration-300 py-1 mb-2 text-white"
